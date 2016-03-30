@@ -1,0 +1,44 @@
+!!! 5
+%html{:lang => 'en'}
+
+  %head
+    %meta{:charset => 'utf-8'}
+    %meta{:name => 'viewport', :content => 'width=device-width, initial-scale=1.0'}
+    %title
+      = content_for?(:title) ? yield(:title) : 'Application page'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    -#%link{:href => 'http://fonts.googleapis.com/css?family=Roboto+Condensed', :rel => 'stylesheet', :type => 'text/css'}
+    = csrf_meta_tags
+    = yield(:head)
+  %body
+    %div.container_15
+      %div.loading
+        -#= image_tag 'spinner.gif', :alt => 'loading', :id => 'loading-image'
+      %div.header
+        %div
+          %a{:href => "/"}
+            = image_tag 'dogebox.png', :alt => 'logo', :class => 'logo-image'
+        %div.grid_4
+          -#- if user_logged_in
+            %div.user-out-box.ui-widget
+              %div.user-box
+                %a{:href => auth_google_logout_path}
+                  %img.user-avatar{:src => "#{session[:user_picture]}?sz=32"}
+                  %span.user-name
+                    = session[:user_name]
+                  %span.clear
+            %div.clear
+        %div.clear
+
+      = yield
+
+      %div.footer
+        %div.grid_15
+          %span.ui-widget
+            © Copyright 2015 DogeBox project, Ukraine, Kiev.
+          %span.ui-widget
+            Revision:
+            = File.exists?('REVISION') ? File.read('REVISION') : 'N/A'
+        %div.clear
+
+      = javascript_include_tag 'application', 'data-turbolinks-track' => true

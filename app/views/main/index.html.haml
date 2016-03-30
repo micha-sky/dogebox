@@ -1,0 +1,36 @@
+= content_for :title do
+  dogebox map
+
+= content_for :head do
+  %script{:type => 'text/javascript', :src  => 'https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDZoaZwYV6PlRe0_z3kwhz6gSRn_pOg1oc'}
+
+  :javascript
+    var city = new google.maps.LatLng(50.4484234,30.5216194);
+    var zoom = 13;
+
+
+%div.ui-panel
+  doge panel
+  %button.ui-panel-button#create-meal-button
+    Create new meal
+
+%div.content
+  %div#map-canvas
+
+
+%div.dialog#create-meal-dialog{:title => 'Create new meal'}
+  %div.ui-widget.input-container
+    %label.field-header{:for => 'name'} Name:
+  %div.ui-widget.input-container
+    %input#name.input-box
+
+  %div.ui-widget.input-container
+    %label.field-header{:for => 'address'} Address:
+  %div.ui-widget.input-container
+    %input#address.input-box
+
+  %div.ui-widget.input-container
+    %label.field-header{:for => 'city'} City:
+  %div.ui-widget.input-container
+    %input#city.input-box
+
